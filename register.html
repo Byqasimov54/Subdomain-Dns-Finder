@@ -1,0 +1,23 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="animate_animated animate_fadeInDown">Register</h1>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        <form id="registerForm" action="/register" method="post">
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+            <input type="submit" value="Register" class="animate_animated animate_fadeInUp">
+        </form>
+        <p class="animate_animated animate_fadeIn">Already have an account? <a href="/login">Login</a></p>
+    </div>
+</body>
+</html>

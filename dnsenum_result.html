@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DNS Enumeration Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Custom styles for dnsenum_result.html */
+        .record-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .record-list li {
+            margin-bottom: 5px;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DNS Enumeration Results for {{ domain }}</h1>
+        {% if 'Error' in results %}
+            <p class="error">{{ results['Error'] }}</p>
+        {% else %}
+            <div class="record-container">
+                {% for record_type, records in results.items() %}
+                    <h2>{{ record_type }} Records</h2>
+                    <ul class="record-list">
+                        {% for record in records %}
+                            <li>{{ record }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if 'Error' not in results %}
+            <form method="post" action="/save_dns_results">
+                <input type="hidden" name="domain" value="{{ domain }}">
+                <input type="submit" value="Save DNS Results">
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

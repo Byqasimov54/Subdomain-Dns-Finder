@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="animate_animated animate_fadeInDown">Login</h1>
+        {% if error %}
+            <p class="error animate_animated animate_fadeIn">{{ error }}</p>
+        {% endif %}
+        <form id="loginForm" action="/login" method="post">
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login" class="animate_animated animate_fadeInUp">
+        </form>
+        <p class="animate_animated animate_fadeIn">Don't have an account? <a href="/register">Register</a></p>
+    </div>
+</body>
+</html>

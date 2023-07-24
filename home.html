@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="animate_animated animate_fadeInDown">Welcome to Home</h1>
+        <p class="animate_animated animate_fadeIn">Congratulations! You have successfully logged in.</p>
+        <p class="animate_animated animate_fadeIn">You can now access the home page content.</p>
+        <p class="animate_animated animate_fadeIn">Feel free to add any additional content here.</p>
+        <p class="animate_animated animate_fadeIn"><a href="/logout">Logout</a></p>
+
+        <h2 class="animate_animated animate_fadeIn">DNS Enumeration</h2>
+        <form id="dnsEnumForm" action="/dnsenum" method="post">
+            <input type="text" name="domain" id="domain" placeholder="Enter Domain Name" required>
+            <input type="submit" value="Enumerate DNS">
+        </form>
+
+        <h2 class="animate_animated animate_fadeIn">Subdomain Enumeration</h2>
+        <form id="subdomainEnumForm" action="/subdomenum" method="post">
+            <input type="text" name="domain" id="domain" placeholder="Enter Domain Name" required>
+            <input type="submit" value="Enumerate Subdomains">
+        </form>
+    </div>
+
+    <script>
+        const logoutButton = document.querySelector("a[href='/logout']");
+        logoutButton.addEventListener("click", () => {
+            window.location.href = "/logout";
+        });
+    </script>
+</body>
+</html>

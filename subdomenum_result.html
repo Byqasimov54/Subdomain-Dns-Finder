@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subdomain Enumeration Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Custom styles for subdomenum_result.html */
+        .subdomain-list {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        .subdomain-group {
+            margin-top: 20px;
+        }
+
+        .subdomain-item {
+            margin-bottom: 5px;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Subdomain Enumeration Results for {{ domain }}</h1>
+        {% if subdomains %}
+            <div class="subdomain-list">
+                {% for subdomain, data in subdomains.items() %}
+                    <div class="subdomain-group">
+                        <h2>{{ subdomain }}</h2>
+                        <ul>
+                            <li class="subdomain-item">IP: {{ data['ip'] }}</li>
+                            <li class="subdomain-item">{% if data['cloudflare'] %}Cloudflare: 🌩{% else %}Cloudflare: ☁️{% endif %}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="error">No subdomains found.</p>
+        {% endif %}
+
+        {% if subdomains %}
+            <form method="post" action="/save_subdomains">
+                <input type="hidden" name="domain" value="{{ domain }}">
+                <input type="submit" value="Save Subdomains">
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
